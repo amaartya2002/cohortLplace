@@ -4,13 +4,22 @@ const express = require("express");
 
 const app = express()
 
-app.get('/', (req, res) => {
+const users = [
+  {
+    name: "AK",
+    kidneys: [{
+      healthy: false
+    }
+    ]
+  }
+]
 
-  const n = Number(req.params.n)
+// how many kidneys do i have and how many are healthy
+app.get("/", (req, res) => {
+  const noOfKidneys = users[0]?.kidneys?.length
+  const noOfHealthyKidneys = users[0]?.kidneys?.filter(k => k.healthy === true).length
 
-  const response = n * n
-
-  res.send(`Hi your response ${response}`)
+  res.status(200).send(`No of kidneys user has: ${noOfKidneys} and ${noOfHealthyKidneys} healthy kidneys he has!`)
 })
 
 app.listen(3000, () => {
