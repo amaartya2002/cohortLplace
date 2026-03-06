@@ -50,6 +50,31 @@ app.post("/", (req, res) => {
 })
 
 
+// replaces all kidneys and make them healthy
+app.put("/", (req, res) => {
+
+  for (const kidney of users[0]?.kidneys) {
+    if (kidney.healthy === false) {
+      kidney.healthy = true
+    }
+  }
+
+  res.send("Kidneys updated!")
+})
+
+// if someone comes to this rote then the server removes all the unhealthy kidneys
+app.delete("/", (req, res) => {
+
+  const newHealthyKidneys = users[0].kidneys.filter(kidney => kidney.healthy === true)
+
+  users[0].kidneys = [...newHealthyKidneys]
+
+  res.json({
+    msg: "Unhealthy kidneys removed"
+  })
+})
+
+
 
 
 app.listen(3000, () => {
