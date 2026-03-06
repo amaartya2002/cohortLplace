@@ -3,7 +3,34 @@ const express = require("express")
 const app = express()
 
 
-app.get("/", (req, res) => { })
+app.get("/", (req, res) => {
+
+  const noOfKidneys = parseInt(req.query.n)
+  const userName = req.headers.name
+  const password = req.headers.password
+
+  if (userName !== "AK" || password !== "AK@123") {
+    res.status(402).json({
+      msg: "Invalid username or password"
+    })
+    return
+  }
+
+  if (noOfKidneys !== 1 && noOfKidneys !== 2) {
+    res.status(402).json({
+      msg: "This aint human"
+    })
+    return
+  }
+
+
+  res.status(200).json({
+    msg: "ALL OKAY",
+    alt: `The user ${userName} has ${noOfKidneys} kidneys`
+  })
+
+
+})
 
 
 app.listen(3000, () => {
