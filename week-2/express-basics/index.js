@@ -10,7 +10,7 @@ const users = [
   {
     name: "AK",
     kidneys: [{
-      healthy: false
+      healthy: true
     }
     ]
   }
@@ -65,17 +65,31 @@ app.put("/", (req, res) => {
 // if someone comes to this rote then the server removes all the unhealthy kidneys
 app.delete("/", (req, res) => {
 
-  const newHealthyKidneys = users[0].kidneys.filter(kidney => kidney.healthy === true)
+  if (isThereAtleastOneUnhealthyKidney(users)) {
+    const newHealthyKidneys = users[0].kidneys.filter(kidney => kidney.healthy === true)
 
-  users[0].kidneys = [...newHealthyKidneys]
+    users[0].kidneys = [...newHealthyKidneys]
 
-  res.json({
-    msg: "Unhealthy kidneys removed"
-  })
+    res.json({
+      msg: "Unhealthy kidneys removed"
+    })
+
+  } else {
+
+    res.status(411).json({
+      msg: "No unhealthy kidney present"
+    })
+
+  }
 })
 
 
+function isThereAtleastOneUnhealthyKidney(users) {
 
+  const count = users[0].kidneys.filter(kidney => kidney.healthy === false).length
+
+  return count ? true : false
+}
 
 app.listen(3000, () => {
   console.log(`Listening on port 3000`);
