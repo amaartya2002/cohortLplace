@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+</head>
+
+<body>
+
+  <div class="main-header">
+    <h1>Total expenses: </h1>
+    <h1 class="total-expense">0</h1>
+  </div>
+
+  <section class="form-section">
+
+    <form action="" id="form">
+      <h1 style="font-size: medium;"> Expense Tracker </h1>
+      <label for="nameInput" class="label">Name</label>
+      <input id="nameInput" type="text" placeholder="Where you spent some money" class="inputz">
+
+      <label for="amountNumber" class="label">Amount</label>
+      <input type="number" name="" placeholder="How much you spent?" id="amountNumber" class="inputz">
+
+      <label for="selectOption" class="label">Cateogory</label>
+      <select name="" id="selectOption">
+        <option value="">--Please choose a category--</option>
+        <option value="food">Food</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="transport">Transport</option>
+      </select>
+
+      <button type="submit" id="submit-btn">Submit</button>
+    </form>
+
+    <div id="expense">
+
+    </div>
+  </section>
+
+
+  <script src="index.js"></script>
+
+</body>
+
+</html>
