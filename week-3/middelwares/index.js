@@ -1,5 +1,5 @@
 const express = require("express")
-
+const zod = require("zod")
 const app = express()
 
 // function authenticateUser(req, res, next) {
@@ -42,16 +42,51 @@ const app = express()
 app.use(express.json())
 
 
+const kidneySchema = zod.array(zod.number())
+
+/**
+ * 
+ * Write zod schema for this
+ * {
+ * 
+ * email : string => email
+ * password : string => at least 8 chars
+ * country : "IN" or "US"
+ * 
+ * }
+ */
+
+const mySchema = zod.object({
+
+  email: zod.string().email(),
+  password: zod.string().min(6).max(8),
+  country: zod.enum(["IN", "US"])
+
+})
+
 
 app.post("/checkup", (req, res) => {
 
   const kidneys = req.body.kidneys
-  const kidneysLength = kidneys.length
+
+  //console.log(kidneySchema.safeParse(kidneys).success)
+
+  const response = mySchema.safeParse({ email: "ak@gmail.com", password: "1234242212", country: "AFG" })
+  console.log(response.success)
+
+  if (kidneySchema.safeParse(kidneys).success) {
+    const kidneysLength = kidneys.length
+    res.status(200).json({
+      msg: `ALL OKAY and you have ${kidneysLength} kidneys.`,
+    })
+
+  } else {
+    res.status(400).json({
+      msg: "Kidneys is not even an array"
+    })
+  }
 
 
-  res.status(200).json({
-    msg: `ALL OKAY and you have ${kidneysLength} kidneys.`,
-  })
 
 
 })
