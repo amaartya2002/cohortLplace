@@ -56,33 +56,35 @@ const kidneySchema = zod.array(zod.number())
  * }
  */
 
-const mySchema = zod.object({
+function validateMyInputs(obj) {
 
-  email: zod.string().email(),
-  password: zod.string().min(6).max(8),
-  country: zod.enum(["IN", "US"])
+  const mySchema = zod.object({
 
-})
+    email: zod.string().email(),
+    password: zod.string().min(6).max(8),
+    country: zod.enum(["IN", "US"])
+
+  })
+
+  const response = mySchema.safeParse(obj).success
+  return response
+}
 
 
-app.post("/checkup", (req, res) => {
-
-  const kidneys = req.body.kidneys
+app.post("/login", (req, res) => {
 
   //console.log(kidneySchema.safeParse(kidneys).success)
 
-  const response = mySchema.safeParse({ email: "ak@gmail.com", password: "1234242212", country: "AFG" })
-  console.log(response.success)
 
-  if (kidneySchema.safeParse(kidneys).success) {
-    const kidneysLength = kidneys.length
+  if (validateMyInputs(req.body)) {
+
     res.status(200).json({
-      msg: `ALL OKAY and you have ${kidneysLength} kidneys.`,
+      msg: "Logged in successfully!"
     })
 
   } else {
     res.status(400).json({
-      msg: "Kidneys is not even an array"
+      msg: "Invalid inputs"
     })
   }
 
