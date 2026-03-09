@@ -1,3 +1,23 @@
+/**
+ * PROBLEM STATEMENT
+ * 
+ * 1. When the user uses the post method with => POST/signin
+ * {
+ * username: string,
+ * password: string
+ * }
+ * WHat to do?
+ * Create a jwt on this username encrypted and return it back to the user, provided that the user exists in the in-memory DB.
+ * 
+ * 2.Route GET/signin with headers Headers - Authorization Header(jwt token)
+ * 
+ * What to do?
+ * Return the array of all the users if the jwt is correct otherwise if token not correct return 403 status code.
+ * 
+ */
+
+
+
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const jwtPassword = "123456";
