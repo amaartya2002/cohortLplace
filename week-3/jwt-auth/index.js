@@ -20,7 +20,7 @@
  */
 
 
-
+require("dotenv").config();
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose")
@@ -33,20 +33,28 @@ app.use(express.json())
 
 
 mongoose.connect(
-  "mongodb+srv://amartyakumar2001:vPbSZj8VAekhQY8a@mongo-week-3.ziluto7.mongodb.net/users",
+  process.env.MONGOOSSE_URI,
 ).then(() => {
   console.log(`Connected to the DB successfully`)
 })
 
+const User = mongoose.model("Users", {
+  username: String,
+  password: String,
+  email: String
+})
 
+const newUser = new User({
+  username: "harkirat@gmail.com",
+  password: "123",
+  name: "harkirat singh",
+})
+
+newUser.save()
 
 
 const ALL_USERS = [
-  {
-    username: "harkirat@gmail.com",
-    password: "123",
-    name: "harkirat singh",
-  },
+  ,
   {
     username: "raman@gmail.com",
     password: "123321",
