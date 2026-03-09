@@ -24,6 +24,8 @@ const jwtPassword = "123456";
 
 const app = express();
 
+app.use(express.json())
+
 const ALL_USERS = [
   {
     username: "harkirat@gmail.com",
@@ -45,6 +47,9 @@ const ALL_USERS = [
 function userExists(username, password) {
   // write logic to return true or false if this user exists
   // in ALL_USERS array
+
+  const userExists = ALL_USERS.some((user) => user.username === username && user.password === password)
+  return userExists
 }
 
 app.post("/signin", function (req, res) {
@@ -57,7 +62,7 @@ app.post("/signin", function (req, res) {
     });
   }
 
-  var token = jwt.sign({ username: username }, "shhhhh");
+  var token = jwt.sign({ username }, jwtPassword);
   return res.json({
     token,
   });
