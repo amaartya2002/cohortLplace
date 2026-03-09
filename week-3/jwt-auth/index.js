@@ -14,17 +14,32 @@
  * What to do?
  * Return the array of all the users if the jwt is correct otherwise if token not correct return 403 status code.
  * 
+ * 
+ * 3. Create the POST/signin endpoint which will create a new user in the mongoDB database if the user does not exist
+ * 
  */
 
 
 
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose")
 const jwtPassword = "123456";
 
 const app = express();
 
 app.use(express.json())
+
+
+
+mongoose.connect(
+  "mongodb+srv://amartyakumar2001:vPbSZj8VAekhQY8a@mongo-week-3.ziluto7.mongodb.net/users",
+).then(() => {
+  console.log(`Connected to the DB successfully`)
+})
+
+
+
 
 const ALL_USERS = [
   {
