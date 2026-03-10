@@ -44,28 +44,52 @@ const User = mongoose.model("Users", {
   email: String
 })
 
-const newUser = new User({
-  username: "harkirat@gmail.com",
-  password: "123",
-  name: "harkirat singh",
+app.post("/signup", async (req, res) => {
+
+  const username = req.body.username
+  const password = req.body.password
+  const email = req.body.email
+
+  const existingUser = await User.findOne({ username })
+  console.log(existingUser)
+
+  if (existingUser) {
+    res.status(402).send("USER ALREADY EXISTS")
+  } else {
+    const newUser = new User({ username, password, email })
+    newUser.save().then(() => {
+      console.log(`User registererd succesfully`)
+    }).catch((err) => {
+      console.log(`ERROR: ${err.message}`)
+    })
+  }
+
+
+
 })
 
-newUser.save()
+// const newUser = new User({
+//   username: "harkirat@gmail.com",
+//   password: "123",
+//   name: "harkirat singh",
+// })
+
+// newUser.save()
 
 
-const ALL_USERS = [
-  ,
-  {
-    username: "raman@gmail.com",
-    password: "123321",
-    name: "Raman singh",
-  },
-  {
-    username: "priya@gmail.com",
-    password: "123321",
-    name: "Priya kumari",
-  },
-];
+// const ALL_USERS = [
+//   ,
+//   {
+//     username: "raman@gmail.com",
+//     password: "123321",
+//     name: "Raman singh",
+//   },
+//   {
+//     username: "priya@gmail.com",
+//     password: "123321",
+//     name: "Priya kumari",
+//   },
+// ];
 
 function userExists(username, password) {
   // write logic to return true or false if this user exists
@@ -114,3 +138,4 @@ app.get("/users", function (req, res) {
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 })
+
