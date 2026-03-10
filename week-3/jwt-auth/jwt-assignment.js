@@ -53,9 +53,25 @@ function signJwt(username, password) {
  *                    Returns false if the token is invalid, expired, or not verified
  *                    using the secret key.
  */
+
+
+
+// ------------------------------------------------
+// jwt.verify() returns is either successfull or throws an error
+// ------------------------------------------------
 function verifyJwt(token) {
   // Your code here
+  try {
+    jwt.verify(token, _secretCode)
+    return true
+  } catch (error) {
+    console.log(`ERROR: ${error.message}`)
+  }
+  return false
 }
+
+console.log(verifyJwt("cbbjcb"));
+
 
 
 
