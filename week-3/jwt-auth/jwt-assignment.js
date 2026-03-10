@@ -1,3 +1,7 @@
+const dotenv = require("dotenv")
+dotenv.config()
+
+
 const express = require("express")
 const jwt = require("jsonwebtoken")
 const zod = require("zod")
@@ -21,13 +25,25 @@ const app = express()
  */
 
 
+const usernameSchema = zod.string().email()
+const passwordSchema = zod.string().min(6)
+const _secretCode = process.env.JWT_SECRET
 
 function signJwt(username, password) {
   // Your code here
+  if (!usernameSchema.safeParse(username).success || !passwordSchema.safeParse(password).success) {
+    return null
+  }
+
+  const token = jwt.sign({ username }, _secretCode)
+  //console.log(token);
+
+  return token
+
 }
 
 
-
+//console.log(signJwt("ak12@yahoo.com", "Ak@1234"))
 
 /**
  * Verifies a JWT using a secret key.
