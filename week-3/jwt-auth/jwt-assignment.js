@@ -68,6 +68,13 @@ function verifyJwt(token) {
  */
 function decodeJwt(token) {
   // Your code here
+  // decode return either the payload if the token is right or returns null if the token is not right
+  const decodedJWT = jwt.decode(token)
+  if (decodeJwt) {
+    return true
+  } else {
+    return false
+  }
 }
 
 
