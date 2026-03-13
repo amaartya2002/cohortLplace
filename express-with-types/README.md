@@ -1,0 +1,8 @@
+- First did a npm init -y => Udhari ka code apne project m aa sake
+- then tsc --init => phir ek ts configuration file apne project m add kar diya
+- then modified the tsconfig.json (mostly rootDir and outDir)
+- can copmile my ts file using (tsc -p .) => from the current directory run my ts files using the tsconfig.json
+- then added a gitignore file using (npx gitignore Node) => so that it initailizes a gitignore file for the node, i dont have to manually add files here (jadooo)
+- i dont want these ts files in production but also i want to share this repo so i used (npm i typescript -D) => so that i can build these typescript files in development only and can share with some who can also install ts and run these files
+- installed tsc-watch (npm i tsc-watch -D) => so to watch my ts files while it gets compiled
+- added a command in the package.json that waatches my ts files and then on success runs my js files from the dist folder
