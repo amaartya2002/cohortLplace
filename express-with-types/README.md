@@ -9,3 +9,5 @@
 
 - added express as a dependency in my project (npm i express)
 - since the express i added into my project comes without types like only the js files, so i have to do get types for my express apis , which i have to get it by another command (npm i @types/express -D) as a dev dependency.
+
+- for any package if its types are availaible then you can do (npm i @types/<PACKAGE_NAME> -D) to get it into your project and since you dont want it go into the production so install it as a dev dependency
