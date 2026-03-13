@@ -4,7 +4,12 @@
 
 import express, { type Application } from "express";
 
-export function createMyServer(): Application {
+export function createMyApplication(): Application {
   const app = express();
+
+  app.get("/hello", (req, res) => {
+    res.send(`Hellooo jiii`);
+  });
+
   return app;
 }

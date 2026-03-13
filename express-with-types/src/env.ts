@@ -1,3 +1,4 @@
+import { log } from "node:console";
 import zod from "zod";
 
 const envSchema = zod.object({
@@ -8,6 +9,8 @@ function parseMyEnv(env: NodeJS.ProcessEnv) {
   const validate = envSchema.safeParse(env);
 
   if (!validate.success) throw new Error(validate.error.message);
+  //console.log(validate.data);
+
   return validate.data;
 }
 
