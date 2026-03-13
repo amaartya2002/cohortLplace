@@ -6,3 +6,6 @@
 - i dont want these ts files in production but also i want to share this repo so i used (npm i typescript -D) => so that i can build these typescript files in development only and can share with some who can also install ts and run these files
 - installed tsc-watch (npm i tsc-watch -D) => so to watch my ts files while it gets compiled
 - added a command in the package.json that waatches my ts files and then on success runs my js files from the dist folder
+
+- added express as a dependency in my project (npm i express)
+- since the express i added into my project comes without types like only the js files, so i have to do get types for my express apis , which i have to get it by another command (npm i @types/express -D) as a dev dependency.
