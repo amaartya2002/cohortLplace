@@ -1,7 +1,8 @@
-import dotenv from "dotenv"
+import "./src/common/config/env.js"
 import app from "./src/app.js"
+import connectToDB from "./src/common/config/db.js"
 
-dotenv.config()
+
 
 const PORT = process.env.PORT || 5000
 const ENV = process.env.NODE_ENV
@@ -10,9 +11,10 @@ const ENV = process.env.NODE_ENV
 const start = async () => {
 
   // connect to DB
+  await connectToDB()
 
   app.listen(PORT, () => {
-    console.log(`App is listening on port ${PORT} in ${ENV} environment`)
+    console.log(`App is listening on port ${PORT} in ${ENV} environment!!`)
   })
 
 }
