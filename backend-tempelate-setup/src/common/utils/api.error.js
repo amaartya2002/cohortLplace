@@ -16,6 +16,10 @@ class ApiError extends Error {
     return new ApiError(403, message)
   }
 
+  static conflict(message = "User already exists") {
+    return new ApiError(409, message)
+  }
+
 
 }
 
